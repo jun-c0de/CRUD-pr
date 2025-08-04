@@ -39,6 +39,8 @@ let initId = 4
 
 app.post("/posts", (req, res) => {
     try {
+        const {subject, desc, status} = req.body
+
         const newPosts = {
             id: initId++,
             displayId: posts.length + 1,
@@ -49,9 +51,9 @@ app.post("/posts", (req, res) => {
             likes: 0
         };
 
-        boards.push(newPosts);
+        posts.push(newPosts);
 
-        res.status(201).json({ message: "게시글 생성 완료", board: newPosts });
+        res.status(201).json({ message: "게시글 생성 완료", posts: newPosts });
     } catch (error) {
         console.error("게시물 생성 중 오류", error);
         res.status(500).json({ message: "서버 오류" });
